@@ -1,8 +1,12 @@
-#### 一、flask+docker部署项目-参考资料：https://zhuanlan.zhihu.com/p/78432719
+### flask+docker
 
-#### 二、requirements.txt-主要用于docker build时获取项目依赖第三方包（pipenv install方式存在问题，暂时不用）
+参考资料：https://zhuanlan.zhihu.com/p/78432719
 
-#### 三、部署至服务器流程:（docker login登录dockerhub）
+#### requirements.txt
+
+主要用于docker build时获取项目依赖第三方包（pipenv install方式存在问题，暂时不用）
+
+#### 部署服务器流程:（docker login登录dockerhub）
 
 1、本地写好Dockerfile(即获取、启动项目依赖，可理解为启动命令)
 
