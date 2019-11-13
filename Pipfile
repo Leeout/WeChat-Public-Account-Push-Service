@@ -11,6 +11,8 @@ requests = "*"
 gunicorn = "*"
 gevent = "*"
 pylint = "*"
+configparser = "*"
+redis = "*"
 
 [requires]
 python_version = "3.7"
