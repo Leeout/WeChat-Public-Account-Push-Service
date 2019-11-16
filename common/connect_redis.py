@@ -1,10 +1,9 @@
-import os
 import redis
 from configparser import ConfigParser
+from common.get_file import get_file
 
-root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)) + '/config/'
 cfg = ConfigParser()
-cfg.read(root_path + 'setting.ini')
+cfg.read(get_file('/config/') + 'dev_setting.ini')
 
 
 def connect_redis():

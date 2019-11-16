@@ -2,10 +2,20 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>给机哥发消息</title>
+    <title>欢迎找机哥</title>
 </head>
-<br>
+
 <body>
-<h1 align="center">{% if message %} {{ message }} {% endif %}</h1>
-</body>
-</html>
+<h1 align="center">{% if message %} 通知提示:{{ message }} {% endif %}</h1>
+<h1>
+    <form align="center" action="/SendMessageTojige/UserComments" method="post">
+        <dl>          
+            <dt>👇给机哥来点建议?</dt>
+            <dd style="font-size:20px;color:red">* 每天只能发一次呦</dd>
+            <dd><label>
+                <textarea style="border:1px solid black" rows="5" cols="50" name="comments"></textarea>
+            </label></dd>
+            <dd><input type="submit" style="border:1px solid black" value="确认提交"/></dd>
+        </dl>
+    </form>
+</h1>
