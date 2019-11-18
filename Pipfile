@@ -16,6 +16,7 @@ redis = "*"
 wtforms = "*"
 flask_wtf = "*"
 flask-bootstrap = "*"
+colorlog = "*"
 
 [requires]
 python_version = "3.7"

@@ -6,7 +6,6 @@ app = Flask(__name__)
 
 app.register_blueprint(send_to_jige)
 app.register_blueprint(send_comments_to_jige)
-app.config['SECRET_KEY'] = 'wechat-api-project'
 
 
 @app.route('/')
