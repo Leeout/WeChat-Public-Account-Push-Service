@@ -5,7 +5,7 @@ from common.get_file import get_file
 from common.get_api_request_count import get_api_request_count
 
 cfg = ConfigParser()
-cfg.read(get_file('/config/') + 'dev_setting.ini')
+cfg.read(get_file('/config/') + 'pro_setting.ini')
 
 
 def wechat_push_service(func_name, user_message):

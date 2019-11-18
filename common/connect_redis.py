@@ -3,7 +3,7 @@ from configparser import ConfigParser
 from common.get_file import get_file
 
 cfg = ConfigParser()
-cfg.read(get_file('/config/') + 'dev_setting.ini')
+cfg.read(get_file('/config/') + 'pro_setting.ini')
 
 
 def connect_redis():
