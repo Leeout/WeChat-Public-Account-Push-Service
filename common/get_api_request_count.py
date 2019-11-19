@@ -1,4 +1,5 @@
 from flask import request
+from common.logger import logger
 from common.connect_redis import connect_redis
 
 
@@ -11,10 +12,12 @@ def get_api_request_count(redis_key, expired_time):
     is_excced = 0  # is_excced表示key是否过期: 0不过期 1过期
     if redis.exists(key):
         redis.incr(key)
+        logger.debug('redis key:%s,value +1', key)
         count = int(redis.get(key))
         if count > limit:
             is_excced = 1
     else:
         redis.set(key, 1)
         redis.expire(key, expired_time)
+        logger.debug('redis key:%s 设置成功，value为1，过期时间为:%s', key, expired_time)
     return is_excced

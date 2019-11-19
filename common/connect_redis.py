@@ -1,5 +1,6 @@
 import redis
 from configparser import ConfigParser
+from common.logger import logger
 from common.get_file import get_file
 
 cfg = ConfigParser()
@@ -12,5 +13,5 @@ def connect_redis():
                                     db=cfg.get('redis', 'db'))
         return redis.Redis(connection_pool=pool)
     except Exception as error:
-        print("redis连接异常，原因为：", error)
+        logger.error("redis连接异常，原因为：", error)
         return

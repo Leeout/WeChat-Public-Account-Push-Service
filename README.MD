@@ -2,7 +2,7 @@
 
 (参考：https://zhuanlan.zhihu.com/p/78432719)
 
-#### requirements.txt (pip freeze > requirements.txt)
+#### requirements.txt   (pip freeze > requirements.txt)
 
 主要用于docker build时获取项目依赖第三方包（pipenv install方式存在问题，暂时不用）
 
@@ -74,6 +74,9 @@ r = redis.Redis(host='redis', port=6379, decode_responses=True)
 1、服务器项目根目录下，自动完成包括构建镜像，（重新）创建服务，启动服务，并关联服务相关容器的一系列操作（链接的服务都将会被自动启动，除非已经处于运行状态）
 
 docker-compose up
+
+重新构建：先docker-compose stop，再
+docker-compose up --build 
 
 2、列出当前运行的服务状态和相关信息
 
