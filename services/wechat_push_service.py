@@ -1,8 +1,8 @@
 import requests
 from configparser import ConfigParser
-from common.logger import logger
-from common.get_file import get_file
-from common.get_api_request_count import get_api_request_count
+from utils.logger import logger
+from utils.get_file import get_file
+from utils.get_api_request_count import get_api_request_count
 
 cfg = ConfigParser()
 cfg.read(get_file('/config/') + 'pro_setting.ini')

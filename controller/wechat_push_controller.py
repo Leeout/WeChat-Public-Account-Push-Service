@@ -2,14 +2,16 @@ from flask import request
 from flask import Blueprint
 from flask import render_template
 from configparser import ConfigParser
-from common.get_file import get_file
+from utils.get_file import get_file
 from services.wechat_push_service import wechat_push_service
+from services.crawling_news_service import get_news_info
 
 send_to_jige = Blueprint('send_message_to_jige', __name__)
 send_comments_to_jige = Blueprint('user_comments', __name__)
+everyday_news_push = Blueprint('news_push', __name__)
 
 cfg = ConfigParser()
-cfg.read(get_file('/config/') + 'pro_setting.ini')
+cfg.read(get_file('/config/') + 'dev_setting.ini')
 
 
 @send_to_jige.route('/SendMessageTojige', methods=['get', 'post'])
@@ -29,3 +31,9 @@ def user_comments():
         return render_template('user_comments.html', message=response)
     else:
         return render_template('user_comments.html', message='输入不能为空！')
+
+
+@everyday_news_push.route('/SendMessageTojige/NewsPush', methods=['get'])
+def news_push():
+    message = get_news_info(cfg.get('news_push', 'url'))
+    return render_template('user_comments.html', message=message)

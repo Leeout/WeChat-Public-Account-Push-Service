@@ -1,6 +1,6 @@
 from flask import request
-from common.logger import logger
-from common.connect_redis import connect_redis
+from utils.logger import logger
+from utils.connect_redis import connect_redis
 
 
 def get_api_request_count(redis_key, expired_time):

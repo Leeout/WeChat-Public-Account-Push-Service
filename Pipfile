@@ -36,6 +36,8 @@ Flask-Bootstrap = "==3.3.7.1"
 Flask-WTF = "==0.14.2"
 Jinja2 = "==2.10.3"
 MarkupSafe = "==1.1.1"
+lxml = "*"
+beautifulsoup4 = "*"
 
 [requires]
 python_version = "3.7"
