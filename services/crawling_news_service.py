@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from configparser import ConfigParser
 from utils.logger import logger
 from utils.get_file import get_file
+from utils.time_base import get_today_date
 
 cfg = ConfigParser()
 cfg.read(get_file('/config/') + 'dev_setting.ini')
@@ -37,25 +38,29 @@ def worker():
 def get_news_info(url):
     try:
         req = requests.get(url)
-        html = req.text.encode('ISO 8859-1')
+        html = req.text
         div_bf = BeautifulSoup(html, "html.parser")
-        div = div_bf.find_all('ul', class_="seo_data_list")
+        content = div_bf.select('.list01_new h3 a')
+        logger.info('爬虫爬取内容：%s', content)
 
         get_url = r"(?<=href=\").+?(?=\")|(?<=href=\').+?(?=\')"
         get_title = r'<a .*?>(.*?)</a>'
-        news_url = re.findall(get_url, str(div), re.I | re.S | re.M)
-        news_title = re.findall(get_title, str(div), re.S | re.M)
-        logger.debug('新闻总数：%s个，链接总数：%s个 \n' % (len(news_title), len(news_url)))
+        url = re.findall(get_url, str(content), re.I | re.S | re.M)
+        title = re.findall(get_title, str(content), re.S | re.M)
+        logger.debug('新闻总数：%s个，链接总数：%s个 \n' % (len(title), len(url)))
+        if len(title) != len(url):
+            return '新闻数量匹配异常！请检查爬取位置！'
 
-        for i, j in zip(news_title[:10], news_url[:10]):  # 对两个列表遍历
-            data = '小机今日推送\n标题：%s\n链接：%s\n' % (i, j)
-            response = requests.get(cfg.get('wxpush', 'open_api') + cfg.get('wxpush', 'uid') + '?content=' + data)
+        requests.get(cfg.get('wxpush', 'open_api') + cfg.get('wxpush', 'uid') + '?content=%s 小机为您推送' % get_today_date())
+        for i, j in zip(title[:10], url[:10]):  # 遍历两个列表，取前十条数据
+            data = '标题：%s\n链接：%s\n' % (i, j)
             time.sleep(1)
-            logger.debug('微信推送API Response:', response.json())
+            requests.get(cfg.get('wxpush', 'open_api') + cfg.get('wxpush', 'uid') + '?content=' + data)
         return '新闻信息获取成功，并推送完成！'
 
     except Exception as error:
-        logger.error('获取失败，原因：%s', error)
+        requests.get(cfg.get('wxpush', 'open_api') + cfg.get('wxpush', 'uid') + '?content=%s 新闻获取失败，原因：%s' % (
+            get_today_date(), error))
         return '获取新闻信息失败，请稍后再试!'
 
 
