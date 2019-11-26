@@ -11,7 +11,7 @@ send_comments_to_jige = Blueprint('user_comments', __name__)
 everyday_news_push = Blueprint('news_push', __name__)
 
 cfg = ConfigParser()
-cfg.read(get_file('/config/') + 'dev_setting.ini')
+cfg.read(get_file('/config/') + 'pro_setting.ini')
 
 
 @send_to_jige.route('/SendMessageTojige', methods=['get', 'post'])

@@ -10,7 +10,7 @@ from utils.get_file import get_file
 from utils.time_base import get_today_date
 
 cfg = ConfigParser()
-cfg.read(get_file('/config/') + 'dev_setting.ini')
+cfg.read(get_file('/config/') + 'pro_setting.ini')
 
 FILE_LOCK = threading.Lock()
 SHARE_Q = Queue()  # 构造一个不限制大小的的队列
