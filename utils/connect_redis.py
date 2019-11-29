@@ -1,17 +1,23 @@
+"""
+连接redis服务
+"""
 import redis
 from configparser import ConfigParser
 from utils.logger import logger
 from utils.get_file import get_file
 
-cfg = ConfigParser()
-cfg.read(get_file('/config/') + 'pro_setting.ini')
+CFG = ConfigParser()
+CFG.read(get_file('/config/') + 'pro_setting.ini')
 
 
 def connect_redis():
+    """
+    连接redis
+    :return: 开启连接通道
+    """
     try:
-        pool = redis.ConnectionPool(host=cfg.get('redis', 'host'), port=cfg.get('redis', 'port'),
-                                    db=cfg.get('redis', 'db'))
+        pool = redis.ConnectionPool(host=CFG.get('redis', 'host'), port=CFG.get('redis', 'port'),
+                                    db=CFG.get('redis', 'db'))
         return redis.Redis(connection_pool=pool)
     except Exception as error:
-        logger.error("redis连接异常，原因为：", error)
-        return
+        logger.error("redis连接异常，原因为：%s", error)
