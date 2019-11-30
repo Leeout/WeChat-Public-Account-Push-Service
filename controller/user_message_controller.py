@@ -1,17 +1,15 @@
 """
- 控制器:获取微信粉丝发送的消息
+控制器:获取微信粉丝发送的消息
 """
 from flask import request
 from flask import Blueprint
 from flask import render_template
 from utils.get_file import get_file
 from configparser import ConfigParser
-from services.crawling_news_service import get_news_info
-from services.wechat_push_service import wechat_push_service
+from services.user_message_service import wechat_push_service
 
 USER_MESSAGE = Blueprint('send_message_to_jige', __name__)
 USER_COMMENTS = Blueprint('user_comments', __name__)
-NEWS_PUSH = Blueprint('news_push', __name__)
 
 CFG = ConfigParser()
 CFG.read(get_file('/config/') + 'pro_setting.ini')
@@ -41,11 +39,3 @@ def user_comments():
         render_template('user_comments.html', message='输入不能为空！')
 
 
-@NEWS_PUSH.route('/SendMessageTojige/NewsPush', methods=['get'])
-def news_push():
-    """
-    获取新浪网科技-手机类新闻，并自动推送
-    :return: 网页展示处理结果
-    """
-    message = get_news_info(CFG.get('news_push', 'url'))
-    return render_template('user_comments.html', message=message)
