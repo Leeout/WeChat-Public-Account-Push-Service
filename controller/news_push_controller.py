@@ -16,7 +16,7 @@ CFG.read(get_file('/config/') + 'pro_setting.ini')
 @NEWS_PUSH.route('/SendMessageTojige/NewsPush', methods=['get'])
 def news_push():
     """
-    获取新浪网科技-手机类新闻，并自动推送
+    获取新浪网科技-手机类新闻，并自动推送（每日10条）
     :return: 网页展示处理结果
     """
     message = get_news_info(CFG.get('news_push', 'url'))

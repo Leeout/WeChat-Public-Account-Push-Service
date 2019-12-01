@@ -16,8 +16,8 @@ CFG.read(get_file('/config/') + 'pro_setting.ini')
 @LAGOU_JD.route('/SendMessageTojige/LaGouJD', methods=['get'])
 def lagou_jd_push():
     """
-    获取拉勾网测试岗位JD，并自动推送
+    获取拉勾网测试岗位JD，并自动推送（每日1页10条）
     :return: 网页展示处理结果
     """
-    message = lagou_jd_push_service()
+    message = lagou_jd_push_service(1, 10)
     return render_template('user_comments.html', message=message)
