@@ -19,7 +19,7 @@ def lagou_jd_push_service(page, number):
     """
     index_url = CFG.get('lagou', 'index_url')
     search_api = CFG.get('lagou', 'search_api')
-    jd_hyper_links = CFG.get('lagou', 'jd_hyper_links')
+    jd_link = CFG.get('lagou', 'jd_hyper_links')
     headers = {
         'Accept': CFG.get('browser_headers', 'Accept'),
         'Referer': CFG.get('lagou', 'Referer'),
@@ -43,7 +43,7 @@ def lagou_jd_push_service(page, number):
         key = company_info[i]
         data = '公司名:%s(%s)\n薪资范围:%s\nJD链接:%s' % (key['companyFullName'],
                                                  key['financeStage'], key['salary'],
-                                                 jd_hyper_links % (key['positionId'], show_id))
+                                                 jd_link % (key['positionId'], show_id))
         requests.get(CFG.get('wxpush', 'open_api') + CFG.get('wxpush', 'uid') + '?content=' + data)
     return '拉钩JD爬取成功，并推送完成！'
 

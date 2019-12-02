@@ -38,4 +38,3 @@ def user_comments():
     return render_template('user_comments.html', message=response) if comments != '' else \
         render_template('user_comments.html', message='输入不能为空！')
 
-
